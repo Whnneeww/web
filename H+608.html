@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>16x16のドット絵を作成するプログラム</title>
+</head>
+<body>
+  <canvas id="myCanvas"></canvas>
+  <a id="downloadLink" href="#" download="myImage.png">画像をダウンロード</a>
+
+  <script>
+    const canvas = document.getElementById('myCanvas');
+    const context = canvas.getContext('2d');
+    canvas.width = 16;
+    canvas.height = 16;
+    
+    const colors = [
+      '#000000', // 黒
+      '#ffffff', // 白
+      '#ff0000', // 赤
+      '#00ff00', // 緑
+      '#0000ff', // 青
+      // 他の色も追加できます
+    ];
+
+    let colorIndex = 0;
+    for (let x = 0; x < canvas.width; x++) {
+      for (let y = 0; y < canvas.height; y++) {
+        const color = colors[colorIndex % colors.length];
+        context.fillStyle = color;
+        context.fillRect(x, y, 1, 1);
+        colorIndex++;
+      }
+    }
+
+    const imageData = canvas.toDataURL();
+    const downloadLink = document.getElementById('downloadLink');
+    downloadLink.href = imageData;
+  </script>
+</body>
+</html>
